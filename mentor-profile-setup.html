@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Up Your Mentor Profile - MentorIT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">mentorIT</a>
+                <nav class="desktop-nav">
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Mentorship <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Expert help <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Freelancing <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">More <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">About Us</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="navbar-right" id="navbar-right">
+                <!-- Will be populated by auth.js -->
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <!-- Will be populated by auth.js -->
+        </div>
+    </div>
+
+    <main>
+        <div class="container max-w-3xl py-12">
+            <div class="space-y-6">
+                <div>
+                    <h1 class="page-title">Set Up Your Mentor Profile</h1>
+                    <p class="text-muted">Complete your profile to start mentoring students</p>
+                </div>
+
+                <form id="profile-form" class="space-y-8">
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label for="profession" class="form-label">Professional Title</label>
+                            <input type="text" id="profession" class="form-input" placeholder="e.g. Senior Software Engineer" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialization" class="form-label">Specialization</label>
+                            <select id="specialization" class="form-select" required>
+                                <option value="" disabled selected>Select your specialization</option>
+                                <option value="frontend">Frontend Development</option>
+                                <option value="backend">Backend Development</option>
+                                <option value="fullstack">Full Stack Development</option>
+                                <option value="mobile">Mobile Development</option>
+                                <option value="devops">DevOps</option>
+                                <option value="data">Data Science</option>
+                                <option value="ai">AI/Machine Learning</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience" class="form-label">Years of Experience</label>
+                            <select id="experience" class="form-select" required>
+                                <option value="" disabled selected>Select years of experience</option>
+                                <option value="1-2">1-2 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="5-10">5-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="education" class="form-label">Education</label>
+                            <input type="text" id="education" class="form-input" placeholder="e.g. MS in Computer Science, Stanford University" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company" class="form-label">Current/Last Company</label>
+                            <input type="text" id="company" class="form-input" placeholder="e.g. Google, Microsoft, etc." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea id="bio" class="form-textarea" placeholder="Tell students about yourself, your expertise, and how you can help them..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hourlyRate" class="form-label">Hourly Rate (USD)</label>
+                            <input type="number" id="hourlyRate" class="form-input" min="1" placeholder="e.g. 50" required>
+                        </div>
+                    </div>
+
+                    <div class="flex-end-container">
+                        <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="save-btn">Save Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication and redirect if not logged in or not a mentor
+            const user = authManager.checkAuth();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            if (user.role !== 'mentor') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Setup form submission
+            const profileForm = document.getElementById('profile-form');
+            const saveBtn = document.getElementById('save-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                saveBtn.textContent = 'Saving...';
+                saveBtn.disabled = true;
+                
+                // Get form data
+                const mentorProfile = {
+                    profession: document.getElementById('profession').value,
+                    specialization: document.getElementById('specialization').value,
+                    experience: document.getElementById('experience').value,
+                    education: document.getElementById('education').value,
+                    company: document.getElementById('company').value,
+                    bio: document.getElementById('bio').value,
+                    hourlyRate: document.getElementById('hourlyRate').value
+                };
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    // Save profile data to localStorage
+                    localStorage.setItem('mentorProfile', JSON.stringify(mentorProfile));
+                    
+                    // Update user profile status
+                    const user = authManager.getUser();
+                    user.profileComplete = true;
+                    authManager.updateUser(user);
+                    
+                    showToast('Profile saved successfully!', 'success');
+                    window.location.href = 'mentor-dashboard.html';
+                }, 1500);
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                window.history.back();
+            });
+        });
+    </script>
+</body>
+</html>

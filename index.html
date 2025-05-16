@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorIT - Find Expert Mentors for Programming Help</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">mentorIT</a>
+                <nav class="desktop-nav">
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Mentorship <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Expert help <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Freelancing <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">More <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">About Us</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="navbar-right" id="navbar-right">
+                <a href="become-mentor.html" class="btn btn-ghost">Become a mentor</a>
+                <a href="login.html" class="btn btn-ghost">Log in</a>
+                <a href="signup.html" class="btn btn-primary">Sign up</a>
+                <button id="mobile-menu-btn" class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <a href="#">Mentorship</a>
+            <a href="#">Expert help</a>
+            <a href="#">Freelancing</a>
+            <a href="#">More</a>
+            <div class="mobile-menu-divider"></div>
+            <a href="become-mentor.html">Become a mentor</a>
+            <a href="login.html">Log in</a>
+            <a href="signup.html" class="mobile-signup-btn">Sign up</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container text-center">
+                <h1>Find a developer for<br>live programming help & freelance jobs</h1>
+                <div class="mt-8">
+                    <a href="find-mentor.html" class="btn btn-primary btn-lg">Get help now</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/mentorlogo.png" alt="Mentoring illustration" width="600" height="200">
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container text-center">
+                <h2>Get help from vetted software developers</h2>
+                <div class="features-grid">
+                    <div class="feature-text">
+                        <h3>One-on-one live<br>programming help</h3>
+                        <ul class="feature-list">
+                            <li><span class="feature-icon">✦</span> Debug with the help of an expert</li>
+                            <li><span class="feature-icon">✦</span> Personalize your learning experience</li>
+                            <li><span class="feature-icon">✦</span> Get unstuck quickly with live help</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        <img src="images/placeholder.svg" alt="Live programming help illustration" width="300" height="250">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">mentorIT</a>
+                    <p>Find expert mentors for programming help</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>For Students</h4>
+                        <a href="find-mentor.html">Find a Mentor</a>
+                        <a href="#">How It Works</a>
+                        <a href="#">Pricing</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>For Mentors</h4>
+                        <a href="become-mentor.html">Become a Mentor</a>
+                        <a href="#">Resources</a>
+                        <a href="#">FAQ</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MentorIT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MentorIT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">mentorIT</a>
+                <nav class="desktop-nav">
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Mentorship <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Expert help <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Freelancing <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">More <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">About Us</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="navbar-right" id="navbar-right">
+                <!-- Will be populated by auth.js -->
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <!-- Will be populated by auth.js -->
+        </div>
+    </div>
+
+    <main>
+        <div class="container py-8">
+            <div class="space-y-6">
+                <div>
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="text-muted" id="dashboard-subtitle">Manage your sessions and questions</p>
+                </div>
+
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="active">Active Sessions</button>
+                        <button class="tab-btn" data-tab="history">Session History</button>
+                        <button class="tab-btn" id="questions-tab-btn" data-tab="questions">My Questions</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="active-tab">
+                        <div id="active-sessions-container">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="history-tab">
+                        <div class="text-center py-12">
+                            <p class="text-muted">No past sessions found</p>
+                            <button class="btn btn-primary mt-4" id="find-mentor-btn">Find a Mentor</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="questions-tab">
+                        <div class="text-center py-12">
+                            <p class="text-muted">No questions asked yet</p>
+                            <button class="btn btn-primary mt-4" id="find-mentor-btn-2">Find a Mentor</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/mentors.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication and redirect if not logged in
+            const user = authManager.checkAuth();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Update dashboard subtitle based on role
+            const dashboardSubtitle = document.getElementById('dashboard-subtitle');
+            if (user.role === 'mentor') {
+                dashboardSubtitle.textContent = 'Manage your mentor profile and sessions';
+                
+                // Hide questions tab for mentors
+                document.getElementById('questions-tab-btn').style.display = 'none';
+            }
+            
+            // Setup tabs
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current button and content
+                    btn.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Setup find mentor buttons
+            document.getElementById('find-mentor-btn').addEventListener('click', () => {
+                window.location.href = 'find-mentor.html';
+            });
+            
+            document.getElementById('find-mentor-btn-2').addEventListener('click', () => {
+                window.location.href = 'find-mentor.html';
+            });
+            
+            // Render active sessions
+            renderActiveSessions();
+        });
+        
+        function renderActiveSessions() {
+            const user = authManager.getUser();
+            const container = document.getElementById('active-sessions-container');
+            
+            // Mock session data
+            let sessions = [];
+            
+            if (user.role === 'student') {
+                sessions = [
+                    {
+                        id: '1',
+                        mentorId: '1',
+                        mentorName: 'Rohit Singh Rajput',
+                        mentorTitle: 'Senior Frontend Developer',
+                        mentorImage: 'images/placeholder.svg',
+                        date: 'April 25, 2025',
+                        status: 'Upcoming'
+                    }
+                ];
+                
+                if (sessions.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-12">
+                            <p class="text-muted">No active sessions found</p>
+                            <button class="btn btn-primary mt-4" id="find-mentor-btn-3">Find a Mentor</button>
+                        </div>
+                    `;
+                    document.getElementById('find-mentor-btn-3').addEventListener('click', () => {
+                        window.location.href = 'find-mentor.html';
+                    });
+                    return;
+                }
+                
+                // Render student sessions
+                sessions.forEach(session => {
+                    const mentor = getMentorById(session.mentorId);
+                    const sessionCard = document.createElement('div');
+                    sessionCard.className = 'card mb-6';
+                    sessionCard.innerHTML = `
+                        <div class="card-header">
+                            <div class="card-header-flex">
+                                <div>
+                                    <h2 class="card-title">Session with ${session.mentorName}</h2>
+                                    <p class="card-description">${session.date} • ${session.status}</p>
+                                </div>
+                                <span class="status-badge ${session.status === 'Upcoming' ? 'status-outline' : 'status-secondary'}">${session.status}</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="mentor-mini-profile">
+                                <div class="mentor-avatar">
+                                    <img src="${mentor.imageUrl || 'images/placeholder.svg'}" alt="${mentor.name}">
+                                </div>
+                                <div>
+                                    <p class="font-medium">${mentor.name}</p>
+                                    <p class="text-sm text-muted">${mentor.title}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <h3 class="font-medium mb-2">Ask your question</h3>
+                                <textarea class="form-textarea" placeholder="Describe your programming problem or question in detail..."></textarea>
+                                <div class="text-right mt-2">
+                                    <button class="btn btn-primary">Submit Question</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(sessionCard);
+                });
+            } else {
+                // Mentor view
+                sessions = [
+                    {
+                        id: '1',
+                        studentName: 'Shivu Srivastava',
+                        studentImage: 'images/shivu.jpg',
+                        date: 'April 25, 2025',
+                        status: 'Pending',
+                        question: "I'm having trouble with React hooks. Specifically, I'm trying to use useEffect to fetch data but I'm getting an infinite loop. Here's my code..."
+                    }
+                ];
+                
+                if (sessions.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-12">
+                            <p class="text-muted">No active sessions found</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Render mentor sessions
+                sessions.forEach(session => {
+                    const sessionCard = document.createElement('div');
+                    sessionCard.className = 'card mb-6';
+                    sessionCard.innerHTML = `
+                        <div class="card-header">
+                            <div class="card-header-flex">
+                                <div>
+                                    <h2 class="card-title">Session with ${session.studentName}</h2>
+                                    <p class="card-description">${session.date} • ${session.status}</p>
+                                </div>
+                                <span class="status-badge ${session.status === 'Pending' ? 'status-outline' : 'status-secondary'}">${session.status}</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="mentor-mini-profile">
+                                <div class="mentor-avatar">
+                                    <img src="${session.studentImage}" alt="${session.studentName}">
+                                </div>
+                                <div>
+                                    <p class="font-medium">${session.studentName}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 space-y-4">
+                                <div>
+                                    <h3 class="font-medium mb-2">Student's Question</h3>
+                                    <p>${session.question}</p>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="font-medium mb-2">Your Response</h3>
+                                    <textarea class="form-textarea" placeholder="Type your response to help the student..."></textarea>
+                                    <div class="text-right mt-2">
+                                        <button class="btn btn-primary">Send Response</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(sessionCard);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

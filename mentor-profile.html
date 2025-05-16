@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Profile - MentorIT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <a href="index.html" class="logo">mentorIT</a>
+                <nav class="desktop-nav">
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Mentorship <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Expert help <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Freelancing <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">Option 1</a>
+                            <a href="#">Option 2</a>
+                            <a href="#">Option 3</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">More <i class="fas fa-chevron-down"></i></button>
+                        <div class="dropdown-content">
+                            <a href="#">About Us</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="navbar-right" id="navbar-right">
+                <!-- Will be populated by auth.js -->
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content" id="mobile-menu-content">
+            <!-- Will be populated by auth.js -->
+        </div>
+    </div>
+
+    <main>
+        <div class="container py-8">
+            <div class="mentor-profile-grid">
+                <div class="mentor-profile-main">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="mentor-profile-header">
+                                <div class="mentor-avatar large">
+                                    <img id="mentor-image" src="images/placeholder.svg" alt="Mentor">
+                                </div>
+                                <div class="mentor-profile-info">
+                                    <h1 id="mentor-name">Loading...</h1>
+                                    <p id="mentor-title" class="text-muted"></p>
+                                    <div class="mentor-rating-container">
+                                        <div class="mentor-rating">
+                                            <span class="star">★</span>
+                                            <span id="mentor-rating"></span>
+                                        </div>
+                                        <span id="mentor-reviews" class="text-muted"></span>
+                                    </div>
+                                    <div id="mentor-skills" class="mentor-skills">
+                                        <!-- Skills badges will be added here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tabs-container">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="about">About</button>
+                            <button class="tab-btn" data-tab="reviews">Reviews</button>
+                        </div>
+                        <div class="tab-content active" id="about-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Bio</h2>
+                                </div>
+                                <div class="card-content">
+                                    <p id="mentor-bio"></p>
+                                </div>
+                            </div>
+
+                            <div class="card mt-6">
+                                <div class="card-header">
+                                    <h2 class="card-title">Experience & Education</h2>
+                                </div>
+                                <div class="card-content">
+                                    <div class="mb-4">
+                                        <h3 class="font-semibold">Professional Experience</h3>
+                                        <p id="mentor-experience"></p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Education</h3>
+                                        <p id="mentor-education"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="reviews-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Reviews</h2>
+                                    <p class="card-description">What students are saying about this mentor</p>
+                                </div>
+                                <div class="card-content">
+                                    <div class="text-center py-8">
+                                        <p class="text-muted">Reviews will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-profile-sidebar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Book a Session</h2>
+                            <p class="card-description">Get help with your programming questions</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="price-container">
+                                <span class="price-label">Hourly Rate</span>
+                                <span id="mentor-price" class="price-value">₹0</span>
+                            </div>
+
+                            <button id="book-session-btn" class="btn btn-primary btn-block">Book Session</button>
+
+                            <div class="text-sm text-muted text-center mt-4">
+                                You'll be able to ask your questions after booking
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/mentors.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            authManager.checkAuth();
+            
+            // Get mentor ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const mentorId = urlParams.get('id') || '1';
+            
+            // Get mentor data
+            const mentor = getMentorById(mentorId);
+            
+            if (!mentor) {
+                window.location.href = 'find-mentor.html';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${mentor.name} - MentorIT`;
+            
+            // Populate mentor data
+            document.getElementById('mentor-image').src = mentor.imageUrl || 'images/placeholder.svg';
+            document.getElementById('mentor-name').textContent = mentor.name;
+            document.getElementById('mentor-title').textContent = mentor.title;
+            document.getElementById('mentor-rating').textContent = mentor.rating;
+            document.getElementById('mentor-reviews').textContent = `(${mentor.reviews || 0} reviews)`;
+            document.getElementById('mentor-bio').textContent = mentor.bio;
+            document.getElementById('mentor-experience').textContent = `${mentor.experience} at companies including ${mentor.company}`;
+            document.getElementById('mentor-education').textContent = mentor.education;
+            document.getElementById('mentor-price').textContent = `₹${mentor.hourlyRate}`;
+            
+            // Populate skills
+            const skillsContainer = document.getElementById('mentor-skills');
+            mentor.specialization.split(', ').forEach(skill => {
+                const badge = document.createElement('span');
+                badge.className = 'skill-badge';
+                badge.textContent = skill;
+                skillsContainer.appendChild(badge);
+            });
+            
+            // Setup tabs
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current button and content
+                    btn.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Setup booking button
+            const bookSessionBtn = document.getElementById('book-session-btn');
+            bookSessionBtn.addEventListener('click', () => {
+                const user = authManager.getUser();
+                
+                if (!user) {
+                    showToast('Please log in to book a session', 'error');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                bookSessionBtn.textContent = 'Processing...';
+                bookSessionBtn.disabled = true;
+                
+                // Simulate booking process
+                setTimeout(() => {
+                    showToast(`Session booked with ${mentor.name}!`, 'success');
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
